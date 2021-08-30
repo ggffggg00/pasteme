@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.impl;
+package ru.borisof.pasteme.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -8,7 +8,6 @@ import ru.borisof.pasteme.dto.PasteCreationRequest;
 import ru.borisof.pasteme.repo.PasteRepository;
 import ru.borisof.pasteme.service.PasteService;
 
-import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
@@ -42,12 +41,14 @@ public class PasteServiceImpl implements PasteService {
 
     @Override
     public String addPaste(PasteCreationRequest creationRequest) {
+
         Paste paste = Paste.builder()
-                .title(creationRequest.getTitle())
+                .title(creationRequest.getTitle() == null ? "" : creationRequest.getTitle())
                 .syntaxType(Paste.PasteSyntaxType.valueOf(
                         creationRequest.getSyntaxType()))
                 .content(encrypt(creationRequest.getContent()))
                 .build();
+
         paste = pasteRepository.save(paste);
         return hashidsGenerator.encode(paste.getId());
     }

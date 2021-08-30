@@ -1,8 +1,10 @@
 package ru.borisof.pasteme.dao;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -23,15 +25,14 @@ import java.util.Date;
 @Data()
 @Entity()
 @Builder()
-@Table(name = "paste")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "pm_paste")
 public class Paste {
 
     public static enum PasteSyntaxType{
         JAVA,
         NONE
-    }
-
-    public Paste() {
     }
 
     @JsonIgnore
