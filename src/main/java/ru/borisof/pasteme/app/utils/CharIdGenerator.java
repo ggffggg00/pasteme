@@ -6,7 +6,7 @@
  *
  */
 
-package ru.borisof.pasteme.commons;
+package ru.borisof.pasteme.app.utils;
 
 import org.hibernate.HibernateException;
 import org.hibernate.engine.spi.SharedSessionContractImplementor;

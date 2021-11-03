@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.dao;
+package ru.borisof.pasteme.model.entity;
 
 import org.hibernate.annotations.CreationTimestamp;
 

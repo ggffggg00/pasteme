@@ -1,8 +1,8 @@
-package ru.borisof.pasteme.dto;
+package ru.borisof.pasteme.model.dto;
 
 import lombok.Builder;
 import lombok.Data;
-import ru.borisof.pasteme.dao.Paste;
+import ru.borisof.pasteme.model.entity.Paste;
 
 @Data
 @Builder

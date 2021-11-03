@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.dto;
+package ru.borisof.pasteme.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.dao;
+package ru.borisof.pasteme.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

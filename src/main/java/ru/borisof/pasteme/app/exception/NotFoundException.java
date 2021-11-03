@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.exception;
+package ru.borisof.pasteme.app.exception;
 
 public class NotFoundException extends RuntimeException{
     public NotFoundException(String message) {

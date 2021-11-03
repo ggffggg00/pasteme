@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.DeferredResult;
-import ru.borisof.pasteme.dto.Notification;
+import ru.borisof.pasteme.model.dto.Notification;
 import ru.borisof.pasteme.service.NotificationService;
 
 import javax.naming.LimitExceededException;

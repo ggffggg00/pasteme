@@ -2,9 +2,9 @@ package ru.borisof.pasteme.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.borisof.pasteme.commons.Hashids;
-import ru.borisof.pasteme.dao.Paste;
-import ru.borisof.pasteme.dto.PasteCreationRequest;
+import ru.borisof.pasteme.app.utils.Hashids;
+import ru.borisof.pasteme.model.entity.Paste;
+import ru.borisof.pasteme.model.dto.PasteCreationRequest;
 import ru.borisof.pasteme.repo.PasteRepository;
 import ru.borisof.pasteme.service.PasteService;
 

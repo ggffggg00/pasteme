@@ -11,7 +11,7 @@
  * @since 0.3.3
  */
 
-package ru.borisof.pasteme.commons;
+package ru.borisof.pasteme.app.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,9 +4,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.stereotype.Service;
-import ru.borisof.pasteme.dao.User;
-import ru.borisof.pasteme.dto.UserRegisterRequest;
-import ru.borisof.pasteme.exception.NotFoundException;
+import ru.borisof.pasteme.model.entity.User;
+import ru.borisof.pasteme.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.app.exception.NotFoundException;
 import ru.borisof.pasteme.repo.UserRepository;
 import ru.borisof.pasteme.service.AccountService;
 
@@ -28,8 +28,8 @@ public class AccountServiceImpl implements AccountService {
 
         User user = User.builder()
                 .email(registerRequest.getEmail())
-                .name(registerRequest.getName())
-                .passwordHash(sha1(registerRequest.getPassword()))
+                .firstname(registerRequest.getName())
+                .password(sha1(registerRequest.getPassword()))
                 .build();
         return repo.save(user);
     }
@@ -49,7 +49,7 @@ public class AccountServiceImpl implements AccountService {
         if (!checkCurrentPassword(currentUserInfo, currentPass))
             throw new ValidationException("Password is incorrect");
 
-        currentUserInfo.setPasswordHash(sha1(newPass));
+        currentUserInfo.setPassword(sha1(newPass));
         return repo.save( currentUserInfo );
 
     }
@@ -68,7 +68,7 @@ public class AccountServiceImpl implements AccountService {
     private boolean checkCurrentPassword(User user, String password){
         if (password == null)
             return false;
-        return sha1(password).equals(user.getPasswordHash());
+        return sha1(password).equals(user.getPassword());
     }
 
     private boolean validateEmail(String email) {

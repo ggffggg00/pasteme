@@ -1,7 +1,7 @@
 package ru.borisof.pasteme.service;
 
-import ru.borisof.pasteme.dao.User;
-import ru.borisof.pasteme.dto.UserRegisterRequest;
+import ru.borisof.pasteme.model.entity.User;
+import ru.borisof.pasteme.model.dto.UserRegisterRequest;
 
 public interface AccountService {
 

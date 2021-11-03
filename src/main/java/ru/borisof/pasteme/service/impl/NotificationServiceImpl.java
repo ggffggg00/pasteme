@@ -3,7 +3,7 @@ package ru.borisof.pasteme.service.impl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.async.DeferredResult;
-import ru.borisof.pasteme.dto.Notification;
+import ru.borisof.pasteme.model.dto.Notification;
 import ru.borisof.pasteme.service.AccountService;
 import ru.borisof.pasteme.service.NotificationService;
 
