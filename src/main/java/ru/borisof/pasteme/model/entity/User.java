@@ -39,6 +39,7 @@ import ru.borisof.pasteme.security.model.Authority;
 @ToString
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class User {
 
     @JsonIgnore
@@ -74,16 +75,11 @@ public class User {
     @Size(min = 4, max = 50)
     private String email;
 
-    @JsonIgnore
-    @Column(name = "activated")
-    @NotNull
-    private boolean activated;
-
     @ManyToMany
     @JoinTable(
         name = "user_authority",
         joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "NAME")})
+        inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "name")})
     @BatchSize(size = 20)
     @Exclude
     private Set<Authority> authorities = new HashSet<>();
@@ -102,6 +98,6 @@ public class User {
 
     @Override
     public int hashCode() {
-        return Objects.hash(this);
+        return Objects.hash(id);
     }
 }

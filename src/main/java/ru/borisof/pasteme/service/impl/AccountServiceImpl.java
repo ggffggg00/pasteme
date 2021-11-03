@@ -1,36 +1,47 @@
 package ru.borisof.pasteme.service.impl;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.util.Collections;
+import javax.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.borisof.pasteme.model.entity.User;
-import ru.borisof.pasteme.model.dto.UserRegisterRequest;
 import ru.borisof.pasteme.app.exception.NotFoundException;
+import ru.borisof.pasteme.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.model.entity.User;
 import ru.borisof.pasteme.repo.UserRepository;
+import ru.borisof.pasteme.security.model.Authority;
+import ru.borisof.pasteme.security.repo.AuthorityRepository;
 import ru.borisof.pasteme.service.AccountService;
-
-import javax.validation.ValidationException;
-import java.math.BigInteger;
-import java.security.MessageDigest;
 
 @RequiredArgsConstructor
 @Service
 public class AccountServiceImpl implements AccountService {
 
     final UserRepository repo;
+    final PasswordEncoder passwordEncoder;
+    final AuthorityRepository authorityRepository;
 
     @Override
     public User registerUser(UserRegisterRequest registerRequest) {
 
-        if (!validateEmail(registerRequest.getEmail()))
+        if (!EmailValidator.getInstance().isValid(registerRequest.getEmail())) {
             throw new ValidationException("Email is incorrect");
+        }
+
+        String encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
+
+        Authority authority = authorityRepository.save(new Authority("user"));
 
         User user = User.builder()
-                .email(registerRequest.getEmail())
-                .firstname(registerRequest.getName())
-                .password(sha1(registerRequest.getPassword()))
-                .build();
+            .email(registerRequest.getEmail())
+            .firstname(registerRequest.getName())
+            .password(encodedPassword)
+            .authorities(Collections.singleton(authority))
+            .build();
         return repo.save(user);
     }
 

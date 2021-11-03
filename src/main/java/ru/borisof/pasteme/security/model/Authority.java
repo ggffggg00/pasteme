@@ -6,8 +6,10 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,21 +20,14 @@ import org.hibernate.Hibernate;
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Authority {
 
   @Id
   @Column(name = "name", length = 50)
   @NotNull
   private String name;
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -48,6 +43,6 @@ public class Authority {
 
   @Override
   public int hashCode() {
-    return Objects.hash(this);
+    return Objects.hash(name);
   }
 }

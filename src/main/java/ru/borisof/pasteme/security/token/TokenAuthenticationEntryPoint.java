@@ -20,4 +20,6 @@ public class TokenAuthenticationEntryPoint implements AuthenticationEntryPoint {
     response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
   }
 
+
+
 }
