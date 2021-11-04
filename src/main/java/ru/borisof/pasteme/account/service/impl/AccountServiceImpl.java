@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.service.impl;
+package ru.borisof.pasteme.account.service.impl;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -7,12 +7,12 @@ import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.borisof.pasteme.model.dto.UserRegisterRequest;
-import ru.borisof.pasteme.model.entity.User;
-import ru.borisof.pasteme.repo.UserRepository;
+import ru.borisof.pasteme.account.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.account.model.entity.User;
+import ru.borisof.pasteme.account.repo.UserRepository;
 import ru.borisof.pasteme.security.model.Authority;
 import ru.borisof.pasteme.security.repo.AuthorityRepository;
-import ru.borisof.pasteme.service.AccountService;
+import ru.borisof.pasteme.account.service.AccountService;
 
 @RequiredArgsConstructor
 @Service

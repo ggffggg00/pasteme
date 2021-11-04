@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import ru.borisof.pasteme.repo.UserRepository;
+import ru.borisof.pasteme.account.repo.UserRepository;
 
 @Component("userDetailsService")
 @RequiredArgsConstructor
@@ -37,7 +37,7 @@ public class DefaultUserDetailsService implements UserDetailsService {
         .orElseThrow(() -> new UsernameNotFoundException("User " + lowercaseLogin + " was not found in the database"));
   }
 
-  private User createSpringSecurityUser(String lowercaseLogin, ru.borisof.pasteme.model.entity.User user) {
+  private User createSpringSecurityUser(String lowercaseLogin, ru.borisof.pasteme.account.model.entity.User user) {
 
     List<GrantedAuthority> grantedAuthorities = user.getAuthorities().stream()
         .map(authority -> new SimpleGrantedAuthority(authority.getName()))

@@ -1,8 +1,8 @@
-package ru.borisof.pasteme.service;
+package ru.borisof.pasteme.account.service;
 
 import java.util.Optional;
-import ru.borisof.pasteme.model.entity.User;
-import ru.borisof.pasteme.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.account.model.entity.User;
+import ru.borisof.pasteme.account.model.dto.UserRegisterRequest;
 
 public interface AccountService {
 

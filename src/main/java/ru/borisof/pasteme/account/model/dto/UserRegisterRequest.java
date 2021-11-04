@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.model.dto;
+package ru.borisof.pasteme.account.model.dto;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

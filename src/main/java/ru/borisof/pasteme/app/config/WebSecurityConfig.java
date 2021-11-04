@@ -88,8 +88,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/authenticate", "/api/register").permitAll()
 
-            .antMatchers("/api/person").hasAuthority("ROLE_USER")
-            .antMatchers("/api/hiddenmessage").hasAuthority("ROLE_ADMIN")
+            .antMatchers("/api/*/**").hasAuthority("ROLE_USER")
+            .antMatchers("/api/admin/*/**").hasAuthority("ROLE_ADMIN")
 
             .anyRequest().authenticated()
 

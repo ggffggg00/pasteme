@@ -1,8 +1,8 @@
-package ru.borisof.pasteme.repo;
+package ru.borisof.pasteme.account.repo;
 
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.borisof.pasteme.model.entity.User;
+import ru.borisof.pasteme.account.model.entity.User;
 
 import java.util.Optional;
 

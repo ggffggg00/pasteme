@@ -1,4 +1,4 @@
-package ru.borisof.pasteme.controller;
+package ru.borisof.pasteme.account.controller;
 
 import javax.validation.Valid;
 import lombok.Data;
@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.borisof.pasteme.model.dto.UserRegisterRequest;
-import ru.borisof.pasteme.model.entity.User;
-import ru.borisof.pasteme.service.AccountService;
+import ru.borisof.pasteme.account.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.account.model.entity.User;
+import ru.borisof.pasteme.account.service.AccountService;
 
 @RestController
 @RequestMapping("/api")
