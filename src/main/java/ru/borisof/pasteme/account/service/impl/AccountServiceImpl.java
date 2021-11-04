@@ -5,14 +5,16 @@ import java.util.Optional;
 import javax.validation.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.validator.routines.EmailValidator;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.borisof.pasteme.account.model.dto.UserRegisterRequest;
 import ru.borisof.pasteme.account.model.entity.User;
 import ru.borisof.pasteme.account.repo.UserRepository;
+import ru.borisof.pasteme.account.service.AccountService;
+import ru.borisof.pasteme.security.SecurityUtils;
 import ru.borisof.pasteme.security.model.Authority;
 import ru.borisof.pasteme.security.repo.AuthorityRepository;
-import ru.borisof.pasteme.account.service.AccountService;
 
 @RequiredArgsConstructor
 @Service
@@ -39,7 +41,7 @@ public class AccountServiceImpl implements AccountService {
 
         String encodedPassword = passwordEncoder.encode(registerRequest.getPassword());
 
-        Authority authority = authorityRepository.save(new Authority("user"));
+        Authority authority = authorityRepository.save(new Authority("ROLE_USER"));
 
         User user = User.builder()
             .email(registerRequest.getEmail())
@@ -59,6 +61,15 @@ public class AccountServiceImpl implements AccountService {
         } else {
             return userRepository.findUserByUsername(emailOrUsername);
         }
+    }
+
+    @Override
+    public User getAuthenticatedUser() {
+        String username = SecurityUtils.getAuthorizedUserName()
+            .orElseThrow(() -> new AccessDeniedException("User not authenticated"));
+
+        return getUserDetailsByEmailOrUsername(username)
+            .orElseThrow(() -> new AccessDeniedException("Unknown user"));
     }
 
     @Override

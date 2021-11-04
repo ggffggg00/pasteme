@@ -10,6 +10,8 @@ public interface AccountService {
 
     Optional<User> getUserDetailsByEmailOrUsername(String emailOrUsername);
 
+    User getAuthenticatedUser();
+
     boolean isUserExists(String emailOrUsername);
 
 }

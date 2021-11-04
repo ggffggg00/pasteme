@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,8 +24,9 @@ import lombok.ToString.Exclude;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import ru.borisof.pasteme.account.model.entity.User;
+import ru.borisof.pasteme.snippet.model.SyntaxType;
 
-@Table(name = "paste")
+@Table(name = "code_snippet")
 @Entity
 @Getter
 @Setter
@@ -31,7 +34,7 @@ import ru.borisof.pasteme.account.model.entity.User;
 @RequiredArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Paste {
+public class CodeSnippet {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,11 +45,11 @@ public class Paste {
   @Column(name = "title", updatable = false, length = 100)
   private String title;
 
-  @Lob
-  @Column(name = "content", updatable = false)
+  @Column(name = "content", updatable = false, length = 10485760)
   private String content;
 
-  @ManyToOne(targetEntity = SyntaxType.class, optional = false)
+  @Enumerated(EnumType.STRING)
+  @Column(name = "syntax_type")
   private SyntaxType syntaxType;
 
   @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
@@ -56,6 +59,10 @@ public class Paste {
   @ManyToOne(targetEntity = User.class, fetch = FetchType.LAZY)
   @Exclude
   private User recipient;
+
+  @Column(name = "public", updatable = false)
+  @Builder.Default
+  private boolean isPublic = true;
 
   @CreationTimestamp
   @Column(name = "created_at", updatable = false, nullable = false)
@@ -69,7 +76,7 @@ public class Paste {
     if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
       return false;
     }
-    Paste paste = (Paste) o;
+    CodeSnippet paste = (CodeSnippet) o;
     return Objects.equals(id, paste.id);
   }
 

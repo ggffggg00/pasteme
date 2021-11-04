@@ -53,7 +53,7 @@ public class SimpleTokenFilter extends GenericFilterBean {
     String tokenHeader = request.getHeader(authorizationHeader);
 
     if (StringUtils.hasText(tokenHeader) && tokenHeader.startsWith(authorizationTokenPrefix)) {
-      return tokenHeader.substring(authorizationHeader.length()).trim();
+      return tokenHeader.substring(authorizationTokenPrefix.length()).trim();
     }
     return null;
   }
