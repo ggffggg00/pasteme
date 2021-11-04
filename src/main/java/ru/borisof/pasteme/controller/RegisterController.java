@@ -1,5 +1,6 @@
 package ru.borisof.pasteme.controller;
 
+import javax.validation.Valid;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.borisof.pasteme.model.dto.UserRegisterRequest;
+import ru.borisof.pasteme.model.entity.User;
 import ru.borisof.pasteme.service.AccountService;
 
 @RestController
@@ -18,10 +20,12 @@ public class RegisterController {
   private final AccountService accountService;
 
   @PostMapping("/register")
-  public ResponseEntity<RegisterResult> register(@RequestBody UserRegisterRequest registerDto) {
+  public ResponseEntity<RegisterResult> register(
+      @RequestBody @Valid UserRegisterRequest registerDto) {
 
-    accountService.registerUser(registerDto);
-    return ResponseEntity.ok(new RegisterResult("ok"));
+    User registeredUser = accountService.registerUser(registerDto);
+    return ResponseEntity.ok(
+        new RegisterResult("ok", registeredUser));
   }
 
   @Data
@@ -29,6 +33,8 @@ public class RegisterController {
   static class RegisterResult {
 
     private final String status;
+
+    private final User userDetails;
   }
 
 }

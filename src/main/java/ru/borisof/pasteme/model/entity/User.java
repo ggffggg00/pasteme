@@ -33,7 +33,7 @@ import org.hibernate.annotations.BatchSize;
 import ru.borisof.pasteme.security.model.Authority;
 
 @Entity
-@Table(name = "user")
+@Table(name = "pasteme_user")
 @Getter
 @Setter
 @ToString
@@ -49,7 +49,7 @@ public class User {
     @SequenceGenerator(name = "USER_SEQ", sequenceName = "USER_SEQ", allocationSize = 1)
     private Long id;
 
-    @Column(name = "username", length = 50, unique = true)
+    @Column(name = "username", length = 50, unique = true, nullable = false)
     @NotNull
     @Size(min = 4, max = 50)
     private String username;
